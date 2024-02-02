@@ -37,8 +37,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Calculator() {
-    var result: Int = 0
-
     var isDoneFirstNum: Boolean = false
     var showResult by remember { mutableStateOf(false) }
     var firstNum: String = ""
@@ -46,6 +44,17 @@ fun Calculator() {
     var operator by remember { mutableStateOf("") }
 
     var label by remember { mutableStateOf("") }
+    var result by remember { mutableStateOf(0) }
+
+    if (operator == "+")
+    {
+        result = firstNum.toInt() + secondNum.toInt()
+    }
+
+    if (operator == "-")
+    {
+        result = firstNum.toInt() - secondNum.toInt()
+    }
 
     Column(modifier = Modifier)
     {
@@ -258,6 +267,10 @@ fun Calculator() {
             }
             Button(onClick = {
                 // reset all
+                showResult = false
+                firstNum = ""
+                secondNum = ""
+                isDoneFirstNum = false
             })
             {
                 Text(text = stringResource(id = R.string.clear))
